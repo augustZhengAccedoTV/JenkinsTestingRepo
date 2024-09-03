@@ -5,7 +5,6 @@ def publishable = isBranch('master') || isBranchType('release')
 
 runPipeline(
     nodeLabel: 'TO-MAC-12',
-    envVarsFileId: 'env-vars',
     parameters: [
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]

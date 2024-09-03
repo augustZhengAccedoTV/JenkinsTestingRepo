@@ -6,11 +6,8 @@ def publishable = isBranch('master') || isBranchType('release')
 runPipeline(
     nodeLabel: 'TO-MAC-12',
     envVarsFileId: 'env-vars',
-    slackChannel: '#cogeco-apple-notifications',
     parameters: [
-        choice(name: 'PLATFORM', choices: ['tvos', 'ios']),
-        choice(name: 'ENVIRONMENT', choices: ['prodc', 'proda']),
-        choice(name: 'BRAND', choices: ['digiflare', 'cogeco'])
+        choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]
 ) { cts ->
 

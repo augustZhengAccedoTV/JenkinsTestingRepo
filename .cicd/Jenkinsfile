@@ -1,0 +1,20 @@
+@Library("shared-jenkins-library@latest") _
+
+def buildType = isBranchType('release') ? 'release' : 'debug'
+def publishable = isBranch('master') || isBranchType('release')
+
+runPipeline(
+    nodeLabel: 'TO-MAC-12',
+    envVarsFileId: 'env-vars',
+    slackChannel: '#cogeco-apple-notifications',
+    parameters: [
+        choice(name: 'PLATFORM', choices: ['tvos', 'ios']),
+        choice(name: 'ENVIRONMENT', choices: ['prodc', 'proda']),
+        choice(name: 'BRAND', choices: ['digiflare', 'cogeco'])
+    ]
+) { cts ->
+
+    stage('Build') {
+        sh "./.cicd/scripts/build.sh"
+    }
+}

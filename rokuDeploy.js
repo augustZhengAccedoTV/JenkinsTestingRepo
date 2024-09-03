@@ -6,6 +6,7 @@ rokuDeploy.deploy({
     password: 'password for roku dev admin portal'
     //other options if necessary
 }).then(function(){
+    console.log("using this")
     //it worked
 }, function(error) {
     //it failed

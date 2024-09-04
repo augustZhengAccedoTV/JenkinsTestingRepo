@@ -10,7 +10,14 @@ runPipeline(
     ]
 ) { cts ->
     stage('SetupNode'){
-        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 "'
+        // Load NVM and install Node.js version 14.17.5
+        sh '''
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+        nvm install 14.17.5
+        nvm use 14.17.5
+        '''
     }
 
     stage('Build') {

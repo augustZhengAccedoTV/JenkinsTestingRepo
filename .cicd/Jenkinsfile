@@ -16,7 +16,7 @@ runPipeline(
     stage('Build') {
         withEnv(["NVM_DIR=$HOME/.nvm"]) {
         sh '''
-        . $NVM_DIR/nvm.sh
+        . $HOME/.nvm/nvm.sh
         nvm use 14.17.5
         npm -v
         ./cicd/scripts/build.sh

@@ -1,5 +1,5 @@
 ROKU_BUILD_TYPES=("proda" "prodc" "debug")
-ROKU_IP="192.168.2.28"
+ROKU_IP="192.168.2.22"
 ROKU_PASSWORD="1234"
 ARCHIVE_NAME="AugustTesting" ## Jira ticket number
 TAG_NAME="0.0.1" ##build version

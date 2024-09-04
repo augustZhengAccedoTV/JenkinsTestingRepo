@@ -9,8 +9,14 @@ runPipeline(
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]
 ) { cts ->
-    stage('SetupNode'){
-        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 "'
+    stage('SetupNode') {
+        sh '''
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+        nvm install 14.17.5 || nvm use 14.17.5
+        npm -v
+        '''
     }
 
     stage('Build') {
@@ -18,8 +24,6 @@ runPipeline(
     }
 
     stage('Archive') {
-        steps {
-            archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
-        }
+        archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
     }
 }

@@ -13,4 +13,10 @@ runPipeline(
     stage('Build') {
         sh "./.cicd/scripts/build.sh"
     }
+
+    stage('Archive') {
+        steps {
+            archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
+        }
+    }
 }

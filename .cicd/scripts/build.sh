@@ -7,11 +7,12 @@ ROKU_FILES=[source/**/*.*,components/**/*.*,images/**/*.*,fonts/**/*.*,manifest,
 TAG_NAME=Test
 ARCHIVE_NAME=Cogeco
 
-for buildType in "${ROKU_BUILD_TYPES[@]}"; do
-    npm run deploy -- --hostIp="$ROKU_IP" --password="$ROKU_PASSWORD" --build_type="$buildType"
-    mv out/roku-deploy.zip "out/${ARCHIVE_NAME}-${TAG_NAME}-${buildType}.zip"
-    if [ -f out/roku-deploy.pkg ]; then
-        mv out/roku-deploy.pkg "out/${ARCHIVE_NAME}-${TAG_NAME}-${buildType}.pkg"
-    fi
-    sleep 5  # Wait for 5 seconds before proceeding to the next build type
-done
+npm run deploy -- --hostIp="$ROKU_IP" --password="$ROKU_PASSWORD"
+# for buildType in "${ROKU_BUILD_TYPES[@]}"; do
+#     npm run deploy -- --hostIp="$ROKU_IP" --password="$ROKU_PASSWORD" --build_type="$buildType"
+#     mv out/roku-deploy.zip "out/${ARCHIVE_NAME}-${TAG_NAME}-${buildType}.zip"
+#     if [ -f out/roku-deploy.pkg ]; then
+#         mv out/roku-deploy.pkg "out/${ARCHIVE_NAME}-${TAG_NAME}-${buildType}.pkg"
+#     fi
+#     sleep 5  # Wait for 5 seconds before proceeding to the next build type
+# done

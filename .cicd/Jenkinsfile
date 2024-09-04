@@ -9,6 +9,9 @@ runPipeline(
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]
 ) { cts ->
+    stage('SetupNode'){
+        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 "'
+    }
 
     stage('Build') {
         sh "./.cicd/scripts/build.sh"

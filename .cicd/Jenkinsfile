@@ -11,15 +11,16 @@ runPipeline(
 ) { cts ->
     stage('SetupNode'){
         sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v;npm install -g roku-deploy; ./.cicd/scripts/build.sh"'
+        archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
     }
 
-    stage('Build') {
-        // sh './.cicd/scripts/build.sh'
-    }
+    // stage('Build') {
+    //     // sh './.cicd/scripts/build.sh'
+    // }
 
-    stage('Archive') {
-        steps {
-            archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
-        }
-    }
+    // stage('Archive') {
+    //     steps {
+    //         archiveArtifacts artifacts: '**/build/*.zip', allowEmptyArchive: true
+    //     }
+    // }
 }

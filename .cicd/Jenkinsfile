@@ -9,8 +9,19 @@ runPipeline(
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]
 ) { cts ->
-    stage('SetupNode'){
-        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v; ././cicd/scripts/build.sh"'
+    stage('Setup and Build') {
+        sh '''
+        # Source NVM and install or use the specified Node.js version
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        nvm install 14.17.5 || nvm use 14.17.5
+
+        # Print npm version to verify correct Node.js version is used
+        npm -v
+
+        # Run the build script
+        ./cicd/scripts/build.sh
+        '''
     }
 
     stage('Build') {

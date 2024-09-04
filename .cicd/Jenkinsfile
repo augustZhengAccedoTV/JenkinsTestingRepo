@@ -10,7 +10,7 @@ runPipeline(
     ]
 ) { cts ->
     stage('SetupNode'){
-        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v"'
+        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v;./.cicd/scripts/build.sh"'
         sh './.cicd/scripts/build.sh'
     }
 

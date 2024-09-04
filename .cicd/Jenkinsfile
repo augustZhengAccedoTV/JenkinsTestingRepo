@@ -14,7 +14,7 @@ runPipeline(
     }
 
     stage('Build') {
-        sh './.cicd/scripts/build.sh'
+        // sh './.cicd/scripts/build.sh'
     }
 
     stage('Archive') {

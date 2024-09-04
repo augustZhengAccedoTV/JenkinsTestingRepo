@@ -1,3 +1,4 @@
+#!/bin/bash
 ROKU_IP=172.20.1.107
 ROKU_PASSWORD=abcd
 ROKU_BUILD_TYPES=debug,prodc,proda,prodb

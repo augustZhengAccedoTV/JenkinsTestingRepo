@@ -5,18 +5,24 @@ def publishable = isBranch('master') || isBranchType('release')
 
 runPipeline(
     nodeLabel: 'TO-MAC-12',
+    dockerImages: [
+        node: [
+            image: 'node:14.17.5',
+        ]
+    ],
     parameters: [
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
     ]
 ) { cts ->
     stage('SetupNode'){
-        sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v;npm install -g roku-deploy; ./.cicd/scripts/build.sh"'
+        // sh 'bash -l -c ". $HOME/.nvm/nvm.sh ; nvm use 14.17.5 || nvm install 14.17.5 && nvm use 14.17.5 ; npm -v;npm install -g roku-deploy; ./.cicd/scripts/build.sh"'
+        cts.node.run('npm install -g roku-deploy')
         archiveArtifacts artifacts: '**/out/*.zip', allowEmptyArchive: true
     }
 
-    // stage('Build') {
-    //     // sh './.cicd/scripts/build.sh'
-    // }
+    stage('Build') {
+        cts.node.run('./.cicd/scripts/build.sh')
+    }
 
     // stage('Archive') {
     //     steps {

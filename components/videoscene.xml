@@ -11,7 +11,7 @@
     sub init()
       videocontent = createObject("RoSGNode", "ContentNode")
 
-      videocontent.title = "Example Video"
+      videocontent.title = "Example Video-1"
       videocontent.streamformat = "mp4"
       videocontent.url = "https://roku-webdev-opus.s3.amazonaws.com/public-videos/big+stream+trimmed.mp4"
 

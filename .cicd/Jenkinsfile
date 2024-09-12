@@ -12,6 +12,9 @@ runPipeline(
     ],
     parameters: [
         choice(name: 'ENVIRONMENT', choices: ['debug','prodc', 'proda']),
+    ],
+    envVars: [
+            PATH: "/opt/homebrew/bin:${env.PATH}"
     ]
 ) { cts ->
     stage('SetupNode'){
